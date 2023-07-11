@@ -11,6 +11,6 @@
 }
 @layer base {
   body {
-    @apply bg-[#111116];
+    @apply bg-[#111116] 
   }
 }
