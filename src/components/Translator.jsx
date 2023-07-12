@@ -3,7 +3,6 @@ import axios from "axios";
 import { World } from "../icons";
 import debounce from "lodash.debounce";
 
-
 function Translator() {
   const [language, setLanguage] = useState("en");
   const [text, setText] = useState("");
@@ -14,13 +13,17 @@ function Translator() {
     setIsOpen(!isOpen);
   };
 
-  function LanguageText ({ value, text }) {
+  function LanguageText({ value, text }) {
     return (
-      <button onClick={handdleClick} className="font-custom hover:bg-second hover:rounded-full p-3" value={value}>
+      <button
+        onClick={handdleClick}
+        className="font-custom hover:bg-second hover:rounded-full p-3"
+        value={value}
+      >
         {text}
       </button>
     );
-  };
+  }
 
   const translateText = async () => {
     const options = {
@@ -52,23 +55,23 @@ function Translator() {
     }
   };
 
-   // Utiliza debounce para retrasar la llamada a translateText
-   const debouncedTranslateText = debounce(translateText, 300);
+  // Utiliza debounce para retrasar la llamada a translateText
+  const debouncedTranslateText = debounce(translateText, 200);
 
-   useEffect(() => {
-     // Llama a la función de traducción cuando el texto cambie
-     debouncedTranslateText();
- 
-     // Cancela el debounce al desmontar el componente
-     return () => {
-       debouncedTranslateText.cancel();
-     };
-   }, [text]);
+  useEffect(() => {
+    // Llama a la función de traducción cuando el texto cambie
+    debouncedTranslateText();
+
+    // Cancela el debounce al desmontar el componente
+    return () => {
+      debouncedTranslateText.cancel();
+    };
+  }, [text]);
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center text-white px-10">
       <div className="w-[20rem] absolute top-0">
-      <img src="./public/logo.png" alt="" className="w-full"/>
+        <img src="./public/logo.png" alt="" className="w-full" />
       </div>
       <div className="w-full h-[500px] flex gap-10">
         <div className="w-[50%] relative flex justify-center">
@@ -82,7 +85,7 @@ function Translator() {
               className="text-white  font-custom h-[25px] outline-none rounded-full px-44"
               onChange={(e) => setLanguage(e.target.value)}
             >
-             <span className="absolute left-14">Language</span>
+              <span className="absolute left-14">Language</span>
             </bottom>
           </div>
           {isOpen && (
@@ -99,7 +102,10 @@ function Translator() {
             id="text"
             className="w-full font-custom resize-none rounded-xl outline-none text-xl p-8 bg-second  text-white pt-20"
             value={text}
-            onChange={(e) => {setText(e.target.value); debouncedTranslateText();}}
+            onChange={(e) => {
+              setText(e.target.value);
+              debouncedTranslateText();
+            }}
           ></textarea>
         </div>
         <div className="w-[50%] font-custom rounded-xl text-xl p-8 bg-second text-white">
