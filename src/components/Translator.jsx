@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { World } from "../icons";
+import debounce from "lodash.debounce";
+
+
 function Translator() {
   const [language, setLanguage] = useState("en");
   const [text, setText] = useState("");
@@ -49,8 +52,24 @@ function Translator() {
     }
   };
 
+   // Utiliza debounce para retrasar la llamada a translateText
+   const debouncedTranslateText = debounce(translateText, 300);
+
+   useEffect(() => {
+     // Llama a la función de traducción cuando el texto cambie
+     debouncedTranslateText();
+ 
+     // Cancela el debounce al desmontar el componente
+     return () => {
+       debouncedTranslateText.cancel();
+     };
+   }, [text]);
+
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center text-white px-10">
+      <div className="w-[20rem] absolute top-0">
+      <img src="./public/logo.png" alt="" className="w-full"/>
+      </div>
       <div className="w-full h-[500px] flex gap-10">
         <div className="w-[50%] relative flex justify-center">
           <div className="absolute bg-first rounded-full my-2 p-4 flex items-center">
@@ -59,10 +78,11 @@ function Translator() {
               id="language"
               onClick={handdleClick}
               value={language}
-              className="text-white font-custom h-[25px] outline-none rounded-full px-44"
+              placeholder="Language"
+              className="text-white  font-custom h-[25px] outline-none rounded-full px-44"
               onChange={(e) => setLanguage(e.target.value)}
             >
-              Languaje
+             <span className="absolute left-14">Language</span>
             </bottom>
           </div>
           {isOpen && (
@@ -79,14 +99,14 @@ function Translator() {
             id="text"
             className="w-full font-custom resize-none rounded-xl outline-none text-xl p-8 bg-second  text-white pt-20"
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e) => {setText(e.target.value); debouncedTranslateText();}}
           ></textarea>
         </div>
-        <div className="w-[50%]   rounded-xl p-8 bg-second  text-white">
+        <div className="w-[50%] font-custom rounded-xl text-xl p-8 bg-second text-white">
           {translation && <p>{translation}</p>}
         </div>
       </div>
-      <button onClick={translateText}>Translate</button>
+      {/* <button onClick={translateText}>Translate</button> */}
     </div>
   );
 }
