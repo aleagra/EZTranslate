@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { World } from "../icons";
 import GetApi from "../services/GetApi";
-import { Debounce, Language } from "../services";
+import { Debounce } from "../services";
 
 function Translator() {
   const [language, setLanguage] = useState("en");
@@ -10,14 +10,40 @@ function Translator() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handdleClick = () => {
-    Language(setLanguage);
     setIsOpen(!isOpen);
   };
+  const handleLanguageChange = async (selectedLanguage) => {
+    setLanguage(selectedLanguage);
+    setIsOpen(false);
+    await GetApi(selectedLanguage, text, setTranslation);
+  };
 
-  function LanguageText({ value, text }) {
+  const Languages = [
+    { language: "af", name: "Afrikáans" },
+    { language: "ar", name: "Arabe" },
+    { language: "bg", name: "Bulgaro" },
+    { language: "ca", name: "Catalan" },
+    { language: "cy", name: "Gales" },
+    { language: "da", name: "Danes" },
+    { language: "de", name: "Aleman" },
+    { language: "el", name: "Griego" },
+    { language: "en", name: "Ingles" },
+    { language: "es", name: "Español" },
+    { language: "fa", name: "Persa" },
+    { language: "fr", name: "Frances" },
+    { language: "he", name: "Hebreo" },
+    { language: "hi", name: "Hindi" },
+    { language: "hr", name: "Croata" },
+    { language: "hu", name: "Hungaro" },
+    { language: "it", name: "Italiano" },
+    { language: "ja", name: "Japones" },
+    { language: "ko", name: "Koreano" },
+  ];
+
+  function LanguageText({ value, text, onClick }) {
     return (
       <button
-        onClick={handdleClick}
+        onClick={() => onClick(value)}
         className="font-custom hover:bg-second hover:rounded-full p-3"
         value={value}
       >
@@ -53,10 +79,14 @@ function Translator() {
           {isOpen && (
             <>
               <div className="absolute grid grid-cols-4 gap-6 bg-first rounded-xl my-20 p-2 px-8 ">
-                <LanguageText value="en" text="English" />
-                <LanguageText value="en" text="English" />
-                <LanguageText value="en" text="English" />
-                <LanguageText value="en" text="English" />
+                {Languages.map((item) => (
+                  <LanguageText
+                    value={item.language}
+                    text={item.name}
+                    key={item.language}
+                    onClick={handleLanguageChange}
+                  />
+                ))}
               </div>
             </>
           )}
