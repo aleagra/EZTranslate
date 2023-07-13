@@ -7,6 +7,7 @@ function Translator() {
   const [language, setLanguage] = useState("en");
   const [text, setText] = useState("");
   const [translation, setTranslation] = useState("");
+  const [title, setTitle] = useState("Language");
   const [isOpen, setIsOpen] = useState(false);
 
   const handdleClick = () => {
@@ -65,7 +66,7 @@ function Translator() {
         <div className="w-[50%] relative flex justify-center">
           <div className="absolute bg-first rounded-full my-2 p-4 flex items-center">
             <World />
-            <bottom
+            <div
               id="language"
               onClick={handdleClick}
               value={language}
@@ -73,18 +74,21 @@ function Translator() {
               className="text-white  font-custom h-[25px] outline-none rounded-full px-44"
               onChange={(e) => setLanguage(e.target.value)}
             >
-              <span className="absolute left-14">Language</span>
-            </bottom>
+              <span className="absolute left-14">{title}</span>
+            </div>
           </div>
           {isOpen && (
             <>
-              <div className="absolute grid grid-cols-4 gap-6 bg-first rounded-xl my-20 p-2 px-8 ">
+              <div className="absolute grid grid-cols-4 gap-4 bg-first rounded-lg my-20 p-4">
                 {Languages.map((item) => (
                   <LanguageText
                     value={item.language}
                     text={item.name}
                     key={item.language}
-                    onClick={handleLanguageChange}
+                    onClick={(e) => {
+                      handleLanguageChange(e);
+                      setTitle(item.name);
+                    }}
                   />
                 ))}
               </div>
