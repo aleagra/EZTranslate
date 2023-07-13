@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { World } from "../icons";
 import GetApi from "../services/GetApi";
-import { Debounce } from "../services";
+import { Debounce, Languages } from "../services";
 
 function Translator() {
   const [language, setLanguage] = useState("en");
@@ -19,28 +19,7 @@ function Translator() {
     await GetApi(selectedLanguage, text, setTranslation);
   };
 
-  const Languages = [
-    { language: "af", name: "Afrikáans" },
-    { language: "ar", name: "Arabe" },
-    { language: "bg", name: "Bulgaro" },
-    { language: "ca", name: "Catalan" },
-    { language: "cy", name: "Gales" },
-    { language: "da", name: "Danes" },
-    { language: "de", name: "Aleman" },
-    { language: "el", name: "Griego" },
-    { language: "en", name: "Ingles" },
-    { language: "es", name: "Español" },
-    { language: "fa", name: "Persa" },
-    { language: "fr", name: "Frances" },
-    { language: "he", name: "Hebreo" },
-    { language: "hi", name: "Hindi" },
-    { language: "hr", name: "Croata" },
-    { language: "hu", name: "Hungaro" },
-    { language: "it", name: "Italiano" },
-    { language: "ja", name: "Japones" },
-    { language: "ko", name: "Koreano" },
-  ];
-
+  // eslint-disable-next-line react/prop-types
   function LanguageText({ value, text, onClick }) {
     return (
       <button

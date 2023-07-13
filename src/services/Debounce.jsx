@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import debounce from "lodash.debounce";
 
+// eslint-disable-next-line react/prop-types
 function Debounce({ translateText, text }) {
   const debouncedTranslateText = debounce(translateText, 300);
 
@@ -9,7 +10,7 @@ function Debounce({ translateText, text }) {
     return () => {
       debouncedTranslateText.cancel();
     };
-  }, [text]);
+  }, [text, debouncedTranslateText]);
 
   return null;
 }
