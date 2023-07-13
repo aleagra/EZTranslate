@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { World } from "../icons";
-import debounce from "lodash.debounce";
+import GetApi from "../services/GetApi";
+import { Debounce, Language } from "../services";
 
 function Translator() {
   const [language, setLanguage] = useState("en");
@@ -10,6 +10,7 @@ function Translator() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handdleClick = () => {
+    Language(setLanguage);
     setIsOpen(!isOpen);
   };
 
@@ -25,53 +26,14 @@ function Translator() {
     );
   }
 
-  const translateText = async () => {
-    const options = {
-      method: "POST",
-      url: "https://microsoft-translator-text.p.rapidapi.com/translate",
-      params: {
-        "to[0]": language,
-        "api-version": "3.0",
-        profanityAction: "NoAction",
-        textType: "plain",
-      },
-      headers: {
-        "content-type": "application/json",
-        "X-RapidAPI-Key": "285c59d0b8msh46372bba5f66c71p1194bbjsn26a8dd6a017b",
-        "X-RapidAPI-Host": "microsoft-translator-text.p.rapidapi.com",
-      },
-      data: [
-        {
-          Text: text,
-        },
-      ],
-    };
-
-    try {
-      const response = await axios.request(options);
-      setTranslation(response.data[0].translations[0].text);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // Utiliza debounce para retrasar la llamada a translateText
-  const debouncedTranslateText = debounce(translateText, 200);
-
-  useEffect(() => {
-    // Llama a la función de traducción cuando el texto cambie
-    debouncedTranslateText();
-
-    // Cancela el debounce al desmontar el componente
-    return () => {
-      debouncedTranslateText.cancel();
-    };
-  }, [text]);
+  async function translateText() {
+    await GetApi(language, text, setTranslation);
+  }
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center text-white px-10">
-      <div className="w-[20rem] absolute top-0">
-        <img src="./public/logo.png" alt="" className="w-full" />
+      <div className="absolute w-[250px] top-20">
+        <img src="./public/logo.png" alt="" className="w-fit h-auto" />
       </div>
       <div className="w-full h-[500px] flex gap-10">
         <div className="w-[50%] relative flex justify-center">
@@ -104,7 +66,6 @@ function Translator() {
             value={text}
             onChange={(e) => {
               setText(e.target.value);
-              debouncedTranslateText();
             }}
           ></textarea>
         </div>
@@ -112,8 +73,9 @@ function Translator() {
           {translation && <p>{translation}</p>}
         </div>
       </div>
-      {/* <button onClick={translateText}>Translate</button> */}
+      <Debounce translateText={translateText} text={text} />
     </div>
   );
 }
+
 export default Translator;
