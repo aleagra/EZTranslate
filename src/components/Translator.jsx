@@ -44,7 +44,7 @@ function Translator() {
     return (
       <button
         onClick={() => onClick(value)}
-        className="font-custom hover:bg-second hover:rounded-full p-3"
+        className="font-custom hover:bg-second hover:rounded-lg p-3"
         value={value}
       >
         {text}
