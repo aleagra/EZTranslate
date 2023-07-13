@@ -31,7 +31,6 @@ async function GetApi(language, text, setTranslation) {
     }
   };
 
-  // Llama a la función translateText para que se ejecute
   await translateText();
 }
 

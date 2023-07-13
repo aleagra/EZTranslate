@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { World } from "../icons";
-import GetApi from "../services/GetApi";
-import { Debounce, Languages } from "../services";
+import { Debounce, GetApi, Languages } from "../services";
 
 function Translator() {
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState("es");
   const [text, setText] = useState("");
   const [translation, setTranslation] = useState("");
   const [title, setTitle] = useState("Language");
@@ -13,6 +12,7 @@ function Translator() {
   const handdleClick = () => {
     setIsOpen(!isOpen);
   };
+
   const handleLanguageChange = async (selectedLanguage) => {
     setLanguage(selectedLanguage);
     setIsOpen(false);
@@ -39,7 +39,7 @@ function Translator() {
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center text-white px-10">
       <div className="absolute w-[250px] top-20">
-        <img src="./public/logo.png" alt="" className="w-fit h-auto" />
+        <img src="./public/logo.webp" alt="" className="w-fit h-auto" />
       </div>
       <div className="w-full h-[500px] flex gap-10">
         <div className="w-[50%] relative flex justify-center">
