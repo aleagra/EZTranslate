@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        custom:[ 'Nunito', 'sans-serif'],
+        mont:[ 'Monstserrat'],
       },
       colors:{
         first: '#111116',

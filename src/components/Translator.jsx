@@ -35,15 +35,24 @@ function Translator() {
   async function translateText() {
     await GetApi(language, text, setTranslation);
   }
-
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center text-white px-10">
       <div className="absolute w-[250px] top-20">
         <img src="./public/logo.webp" alt="" className="w-fit h-auto" />
       </div>
       <div className="w-full h-[500px] flex gap-10">
-        <div className="w-[50%] relative flex justify-center">
-          <div className="absolute bg-first rounded-full my-2 p-4 flex items-center">
+        <textarea
+          id="text"
+          className="w-[50%] resize-none outline-none font-custom rounded-xl text-xl p-8 bg-second text-white"
+          value={text}
+          placeholder="Escribe lo que deseas traducir..."
+          onChange={(e) => {
+            setText(e.target.value);
+          }}
+        />
+
+        <div className="w-[50%] relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
+          <div className="absolute bg-first rounded-full my-2 p-2 flex items-center">
             <World />
             <div
               id="language"
@@ -56,9 +65,12 @@ function Translator() {
               <span className="absolute left-14">{title}</span>
             </div>
           </div>
+            <div className="absolute w-full top-32 left-10">
+            {translation && <p>{translation}</p>}
+            </div>
           {isOpen && (
             <>
-              <div className="absolute grid grid-cols-4 gap-4 bg-first rounded-lg my-20 p-4">
+              <div className="absolute grid grid-cols-4 gap-4 bg-first rounded-lg my-16 p-4">
                 {Languages.map((item) => (
                   <LanguageText
                     value={item.language}
@@ -73,17 +85,6 @@ function Translator() {
               </div>
             </>
           )}
-          <textarea
-            id="text"
-            className="w-full font-custom resize-none rounded-xl outline-none text-xl p-8 bg-second  text-white pt-20"
-            value={text}
-            onChange={(e) => {
-              setText(e.target.value);
-            }}
-          ></textarea>
-        </div>
-        <div className="w-[50%] font-custom rounded-xl text-xl p-8 bg-second text-white">
-          {translation && <p>{translation}</p>}
         </div>
       </div>
       <Debounce translateText={translateText} text={text} />
