@@ -60,6 +60,11 @@ function Translator() {
     setIsListening((prevState) => !prevState);
   };
 
+  const handleReset = () => {
+    setText(""); // Resetear el estado 'text' a una cadena vacía
+    resetTranscript(); // Resetear el estado 'transcript' a una cadena vacía
+  };
+
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
   }
@@ -101,21 +106,21 @@ function Translator() {
         <img src="./public/logo.webp" alt="" className="w-fit h-auto" />
       </div>
       <div className="w-full h-[500px] flex gap-10">
-        <div className="w-[50%]  relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
+        <div className="w-[50%] relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
           <textarea
             id="text"
             className="w-full resize-none outline-none font-custom rounded-xl text-xl py-24 bg-second text-white"
-            value={transcript}
-            placeholder="Escribe lo que deseas traducir..."
+            value={text}
             onChange={(e) => {
               setText(e.target.value);
             }}
           />
+          <p className="w-fit absolute resize-none z-20 font-custom rounded-xl text-xl top-32 left-8 bg-second text-white">{transcript}</p>
           <div className="absolute z-20 w-full h-[30px] bottom-8 gap-9 flex items-center justify-center">
             <button className="hover:bg-first p-4 rounded-full" onClick={handleToggleListening}>
               {isListening ? <StopIcon /> : <Microphone />}
             </button>
-            <button onClick={resetTranscript}>Reset</button>
+            <button onClick={handleReset}>Reset</button>
           </div>
           <div className="absolute bg-first rounded-full flex items-center h-[50px]">
             <World />
