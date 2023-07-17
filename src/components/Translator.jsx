@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { World } from "../icons";
+import { Arrow, World } from "../icons";
 import { Debounce, Detector, GetApi, Languages } from "../services";
 
 function Translator() {
@@ -34,8 +34,8 @@ function Translator() {
   }
 
   async function translateText() {
-    await Detector(text, setDetector);
     await GetApi(language, text, setTranslation);
+    await Detector(text, setDetector);
   }
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center text-white px-10">
@@ -46,7 +46,7 @@ function Translator() {
         <div className="w-[50%]  relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
           <textarea
             id="text"
-            className="w-full resize-none outline-none font-custom rounded-xl text-xl p-8 py-20 bg-second text-white"
+            className="w-full resize-none outline-none font-custom rounded-xl text-xl py-24 bg-second text-white"
             value={text}
             placeholder="Escribe lo que deseas traducir..."
             onChange={(e) => {
@@ -66,18 +66,23 @@ function Translator() {
           </div>
         </div>
         <div className="w-[50%] relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
-          <div className="absolute bg-first rounded-full flex items-center h-[50px]">
+          <div
+            className="absolute bg-first rounded-full flex items-center h-[50px] cursor-pointer"
+            onClick={handdleClick}
+          >
             <World />
             <div
               id="language"
-              onClick={handdleClick}
               value={language}
               placeholder="Language"
               className="text-white font-custom outline-none rounded-full px-44"
               onChange={(e) => setLanguage(e.target.value)}
             >
-              <span className="absolute left-14 top-3">{title}</span>
+              <span className="absolute left-14 top-3 select-none">
+                {title}
+              </span>
             </div>
+            <Arrow />
           </div>
           <div className="absolute w-full top-32 left-10">
             {translation && <p>{translation}</p>}

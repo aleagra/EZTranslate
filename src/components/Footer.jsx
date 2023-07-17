@@ -26,20 +26,26 @@ export const Footer = () => {
               <h1 className="font-bold">{element.nombre}</h1>
               <div className="flex gap-3">
                 <a
+                  target="_blank"
                   href={element.urlLinkedin}
                   className="hover:scale-125 ease-in duration-300"
+                  rel="noreferrer"
                 >
                   <Linkedin />
                 </a>
                 <a
+                  target="_blank"
                   href={element.urlGit}
                   className="hover:scale-125 ease-in duration-300"
+                  rel="noreferrer"
                 >
                   <Github />
                 </a>
                 <a
+                  target="_blank"
                   href={element.urlPortafolio}
                   className="hover:scale-125 ease-in duration-300"
+                  rel="noreferrer"
                 >
                   <WorldPortafolio />
                 </a>
