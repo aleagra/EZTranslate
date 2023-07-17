@@ -19,38 +19,42 @@ export const Footer = () => {
     },
   ];
 
-  function Element({ nombre, urlLinkedin, urlGit, urlPortafolio }) {
+  function Element() {
     return (
-      <div className="w-full flex items-center">
+      <div className="w-[50%] flex items-center">
         {elements.map((element, index) => (
-          <div key={index} className="w-[50%] flex flex-col items-center gap-2">
-            <h1>{element.nombre}</h1>
-            <div className="flex gap-3">
-              <a
-                href={element.urlLinkedin}
-                className="hover:scale-125 ease-in duration-300"
-              >
-                <Linkedin />
-              </a>
-              <a
-                href={element.urlGit}
-                className="hover:scale-125 ease-in duration-300"
-              >
-                <Github />
-              </a>
-              <a
-                href={element.urlPortafolio}
-                className="hover:scale-125 ease-in duration-300"
-              >
-                <WorldPortafolio />
-              </a>
+          <div className="w-[100%] flex justify-center">
+            <div
+              key={index}
+              className="w-[50%] flex flex-col items-center gap-2"
+            >
+              <h1>{element.nombre}</h1>
+              <div className="flex gap-3">
+                <a
+                  href={element.urlLinkedin}
+                  className="hover:scale-125 ease-in duration-300"
+                >
+                  <Linkedin />
+                </a>
+                <a
+                  href={element.urlGit}
+                  className="hover:scale-125 ease-in duration-300"
+                >
+                  <Github />
+                </a>
+                <a
+                  href={element.urlPortafolio}
+                  className="hover:scale-125 ease-in duration-300"
+                >
+                  <WorldPortafolio />
+                </a>
+              </div>
             </div>
           </div>
         ))}
       </div>
     );
   }
-
 
   return (
     <div className="w-full absolute flex justify-center h-[100px] bottom-0 bg-second text-white">
