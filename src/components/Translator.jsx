@@ -3,10 +3,10 @@ import { Arrow, World } from "../icons";
 import { Debounce, Detector, GetApi, Languages } from "../services";
 
 function Translator() {
-  const [language, setLanguage] = useState("es");
+  const [language, setLanguage] = useState("");
   const [text, setText] = useState("");
   const [translation, setTranslation] = useState("");
-  const [title, setTitle] = useState("Language");
+  const [title, setTitle] = useState("Select language");
   const [isOpen, setIsOpen] = useState(false);
   const [detector, setDetector] = useState("");
 
