@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { World } from "../icons";
-import { Debounce, GetApi, Languages } from "../services";
+import { Debounce, Detector, GetApi, Languages } from "../services";
 
 function Translator() {
   const [language, setLanguage] = useState("es");
@@ -8,6 +8,7 @@ function Translator() {
   const [translation, setTranslation] = useState("");
   const [title, setTitle] = useState("Language");
   const [isOpen, setIsOpen] = useState(false);
+  const [detector, setDetector] = useState("");
 
   const handdleClick = () => {
     setIsOpen(!isOpen);
@@ -33,6 +34,7 @@ function Translator() {
   }
 
   async function translateText() {
+    await Detector(text, setDetector);
     await GetApi(language, text, setTranslation);
   }
   return (
@@ -41,16 +43,28 @@ function Translator() {
         <img src="./public/logo.webp" alt="" className="w-fit h-auto" />
       </div>
       <div className="w-full h-[500px] flex gap-10">
-        <textarea
-          id="text"
-          className="w-[50%] resize-none outline-none font-custom rounded-xl text-xl p-8 bg-second text-white"
-          value={text}
-          placeholder="Escribe lo que deseas traducir..."
-          onChange={(e) => {
-            setText(e.target.value);
-          }}
-        />
-
+        <div className="w-[50%]  relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
+          <textarea
+            id="text"
+            className="w-full resize-none outline-none font-custom rounded-xl text-xl p-8 py-20 bg-second text-white"
+            value={text}
+            placeholder="Escribe lo que deseas traducir..."
+            onChange={(e) => {
+              setText(e.target.value);
+            }}
+          />
+          <div className="absolute bg-first rounded-full flex items-center h-[50px]">
+            <World />
+            <div
+              placeholder="Detectar idioma"
+              className="text-white font-custom outline-none rounded-full px-44"
+            >
+              <span className="absolute left-14 top-3">
+                Detect language: {detector}
+              </span>
+            </div>
+          </div>
+        </div>
         <div className="w-[50%] relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
           <div className="absolute bg-first rounded-full flex items-center h-[50px]">
             <World />
