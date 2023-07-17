@@ -1,7 +1,9 @@
-import { useState } from "react";
-import { Arrow, Copy, World } from "../icons";
+import { useEffect, useState } from "react";
+import { Arrow, Copy, Microphone, StopIcon, World } from "../icons";
 import { Debounce, Detector, GetApi, Languages } from "../services";
-
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 function Translator() {
   const [language, setLanguage] = useState("es");
   const [text, setText] = useState("");
@@ -9,6 +11,58 @@ function Translator() {
   const [title, setTitle] = useState("Select language");
   const [isOpen, setIsOpen] = useState(false);
   const [detector, setDetector] = useState("");
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+    interimTranscript,
+    finalTranscript,
+  } = useSpeechRecognition();
+
+  const handleInterimTranscript = (interimTranscript) => {
+    setText(interimTranscript);
+  };
+
+  useEffect(() => {
+    // Aquí realizamos la traducción en tiempo real
+    const translateText = async () => {
+      await GetApi(language, text, setTranslation);
+    };
+
+    // Verificamos si el reconocimiento de voz está activo y actualizamos la transcripción
+    if (listening) {
+      if (finalTranscript !== "") {
+        setText(finalTranscript);
+        translateText(); // Realizar la traducción cuando hay un texto final
+      } else {
+        handleInterimTranscript(interimTranscript); // Actualizar el texto intermedio
+      }
+    }
+  }, [listening, language, text, finalTranscript, interimTranscript]);
+
+  const [isListening, setIsListening] = useState(false);
+
+  useEffect(() => {
+    if (isListening) {
+      SpeechRecognition.startListening();
+    } else {
+      SpeechRecognition.stopListening();
+    }
+  }, [
+    isListening,
+    SpeechRecognition.startListening,
+    SpeechRecognition.stopListening,
+  ]);
+
+  const handleToggleListening = () => {
+    setIsListening((prevState) => !prevState);
+  };
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
+  }
 
   const handdleClick = () => {
     setIsOpen(!isOpen);
@@ -51,12 +105,18 @@ function Translator() {
           <textarea
             id="text"
             className="w-full resize-none outline-none font-custom rounded-xl text-xl py-24 bg-second text-white"
-            value={text}
+            value={transcript}
             placeholder="Escribe lo que deseas traducir..."
             onChange={(e) => {
               setText(e.target.value);
             }}
           />
+          <div className="absolute z-20 w-full h-[30px] bottom-8 gap-9 flex items-center justify-center">
+            <button className="hover:bg-first p-4 rounded-full" onClick={handleToggleListening}>
+              {isListening ? <StopIcon /> : <Microphone />}
+            </button>
+            <button onClick={resetTranscript}>Reset</button>
+          </div>
           <div className="absolute bg-first rounded-full flex items-center h-[50px]">
             <World />
             <div
@@ -68,6 +128,7 @@ function Translator() {
               </span>
             </div>
           </div>
+          <div className="w-full flex"></div>
         </div>
         <div className="w-[50%] relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
           <div onClick={copiarTexto}>
@@ -92,6 +153,7 @@ function Translator() {
             <Arrow />
           </div>
           <div className="absolute w-full top-32 left-10">
+            {interimTranscript && <p>{interimTranscript}</p>}
             {translation && <p>{translation}</p>}
           </div>
 
