@@ -115,7 +115,7 @@ function Translator() {
               setText(e.target.value);
             }}
           />
-          <p className="w-fit absolute resize-none z-20 font-custom rounded-xl text-xl top-32 left-8 bg-second text-white">{transcript}</p>
+          <p className="w-fit h-[300px] absolute resize-none z-20 font-custom rounded-xl text-xl top-32 left-8 bg-second text-white">{transcript}</p>
           <div className="absolute z-20 w-full h-[30px] bottom-8 gap-9 flex items-center justify-center">
             <button className="hover:bg-first p-4 rounded-full" onClick={handleToggleListening}>
               {isListening ? <StopIcon /> : <Microphone />}
@@ -133,9 +133,8 @@ function Translator() {
               </span>
             </div>
           </div>
-          <div className="w-full flex"></div>
         </div>
-        <div className="w-[50%] relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
+        <div className="w-[50%] relative flex justify-center font-custom rounded-xl text-xl py-8 bg-second text-white">
           <div onClick={copiarTexto}>
             <Copy />
           </div>
@@ -159,7 +158,7 @@ function Translator() {
           </div>
           <div className="absolute w-full top-32 left-10">
             {interimTranscript && <p>{interimTranscript}</p>}
-            {translation && <p>{translation}</p>}
+            {translation && <p className="w-[50%]">{translation}</p>}
           </div>
 
           {isOpen && (
