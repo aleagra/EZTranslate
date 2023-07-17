@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Arrow, World } from "../icons";
+import { Arrow, Copy, World } from "../icons";
 import { Debounce, Detector, GetApi, Languages } from "../services";
 
 function Translator() {
-  const [language, setLanguage] = useState("");
+  const [language, setLanguage] = useState("es");
   const [text, setText] = useState("");
   const [translation, setTranslation] = useState("");
   const [title, setTitle] = useState("Select language");
@@ -32,6 +32,10 @@ function Translator() {
       </button>
     );
   }
+  const copiarTexto = () => {
+    navigator.clipboard.writeText(translation);
+    console.log("Texto copiado:", translation);
+  };
 
   async function translateText() {
     await GetApi(language, text, setTranslation);
@@ -66,6 +70,9 @@ function Translator() {
           </div>
         </div>
         <div className="w-[50%] relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
+          <div onClick={copiarTexto}>
+            <Copy />
+          </div>
           <div
             className="absolute bg-first rounded-full flex items-center h-[50px] cursor-pointer"
             onClick={handdleClick}
@@ -87,6 +94,7 @@ function Translator() {
           <div className="absolute w-full top-32 left-10">
             {translation && <p>{translation}</p>}
           </div>
+
           {isOpen && (
             <>
               <div className="absolute grid grid-cols-4 gap-4 bg-first rounded-lg my-16 p-4">
