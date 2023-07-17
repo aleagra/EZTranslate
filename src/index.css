@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
-  font-family: 'Monstserrat';
-  src: url('./fonts/Montserrat-VariableFont_wght.ttf');
+  font-family: "Monstserrat";
+  src: url("./fonts/Montserrat-VariableFont_wght.ttf");
 }
 @layer base {
   body {

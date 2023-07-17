@@ -1,6 +1,4 @@
-import React from "react";
-import { Github, Linkedin } from "../icons";
-import { WorldPortafolio } from "../icons/WorldPortafolio";
+import { Github, Linkedin, WorldPortafolio } from "../icons";
 
 export const Footer = () => {
   const elements = [
@@ -21,14 +19,11 @@ export const Footer = () => {
 
   function Element() {
     return (
-      <div className="w-[50%] flex items-center">
-        {elements.map((element, index) => (
-          <div className="w-[100%] flex justify-center">
-            <div
-              key={index}
-              className="w-[50%] flex flex-col items-center gap-2"
-            >
-              <h1>{element.nombre}</h1>
+      <div className="w-full justify-between flex items-center">
+        {elements.map((element) => (
+          <div className="w-[100%] flex justify-center" key={element}>
+            <div className="flex items-center gap-2  max-lg:flex-col">
+              <h1 className="font-bold">{element.nombre}</h1>
               <div className="flex gap-3">
                 <a
                   href={element.urlLinkedin}
@@ -57,7 +52,7 @@ export const Footer = () => {
   }
 
   return (
-    <div className="w-full absolute flex justify-center h-[100px] bottom-0 bg-second text-white">
+    <div className="w-full absolute flex justify-center h-[70px] bottom-0 bg-second text-white">
       <Element />
     </div>
   );

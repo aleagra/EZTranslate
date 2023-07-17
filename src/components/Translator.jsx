@@ -52,22 +52,22 @@ function Translator() {
         />
 
         <div className="w-[50%] relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
-          <div className="absolute bg-first rounded-full my-2 p-2 flex items-center">
+          <div className="absolute bg-first rounded-full flex items-center h-[50px]">
             <World />
             <div
               id="language"
               onClick={handdleClick}
               value={language}
               placeholder="Language"
-              className="text-white  font-custom h-[25px] outline-none rounded-full px-44"
+              className="text-white font-custom outline-none rounded-full px-44"
               onChange={(e) => setLanguage(e.target.value)}
             >
-              <span className="absolute left-14">{title}</span>
+              <span className="absolute left-14 top-3">{title}</span>
             </div>
           </div>
-            <div className="absolute w-full top-32 left-10">
+          <div className="absolute w-full top-32 left-10">
             {translation && <p>{translation}</p>}
-            </div>
+          </div>
           {isOpen && (
             <>
               <div className="absolute grid grid-cols-4 gap-4 bg-first rounded-lg my-16 p-4">

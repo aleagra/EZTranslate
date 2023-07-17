@@ -18,4 +18,5 @@ export const Languages = [
   { language: "it", name: "Italiano" },
   { language: "ja", name: "Japones" },
   { language: "ko", name: "Koreano" },
+  { language: "th", name: "Tailandés" },
 ];
