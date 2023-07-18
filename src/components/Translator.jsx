@@ -26,21 +26,12 @@ function Translator() {
   };
 
   useEffect(() => {
-    // Aquí realizamos la traducción en tiempo real
-    const translateText = async () => {
-      await GetApi(language, text, setTranslation);
-    };
-
-    // Verificamos si el reconocimiento de voz está activo y actualizamos la transcripción
     if (listening) {
       if (finalTranscript !== "") {
         setText(finalTranscript);
-        translateText(); // Realizar la traducción cuando hay un texto final
-      } else {
-        handleInterimTranscript(interimTranscript); // Actualizar el texto intermedio
       }
     }
-  }, [listening, language, text, finalTranscript, interimTranscript]);
+  }, [listening, language, text, finalTranscript]);
 
   const [isListening, setIsListening] = useState(false);
 
@@ -115,9 +106,14 @@ function Translator() {
               setText(e.target.value);
             }}
           />
-          <p className="w-fit h-[300px] absolute resize-none z-20 font-custom rounded-xl text-xl top-32 left-8 bg-second text-white">{transcript}</p>
+          <p className="w-fit h-[300px] absolute resize-none z-20 font-custom rounded-xl text-xl top-32 left-8 bg-second text-white">
+            {transcript}
+          </p>
           <div className="absolute z-20 w-full h-[30px] bottom-8 gap-9 flex items-center justify-center">
-            <button className="hover:bg-first p-4 rounded-full" onClick={handleToggleListening}>
+            <button
+              className="hover:bg-first p-4 rounded-full"
+              onClick={handleToggleListening}
+            >
               {isListening ? <StopIcon /> : <Microphone />}
             </button>
             <button onClick={handleReset}>Reset</button>
