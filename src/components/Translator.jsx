@@ -21,10 +21,6 @@ function Translator() {
     finalTranscript,
   } = useSpeechRecognition();
 
-  const handleInterimTranscript = (interimTranscript) => {
-    setText(interimTranscript);
-  };
-
   useEffect(() => {
     if (listening) {
       if (finalTranscript !== "") {
@@ -52,11 +48,12 @@ function Translator() {
   };
 
   const handleReset = () => {
-    setText(""); // Resetear el estado 'text' a una cadena vacía
-    resetTranscript(); // Resetear el estado 'transcript' a una cadena vacía
+    setText("");
+    resetTranscript();
   };
 
   if (!browserSupportsSpeechRecognition) {
+    // eslint-disable-next-line react/no-unescaped-entities
     return <span>Browser doesn't support speech recognition.</span>;
   }
 
