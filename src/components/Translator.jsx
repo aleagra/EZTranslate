@@ -132,7 +132,10 @@ function Translator() {
           </div>
         </div>
         <div className="w-[50%] relative flex justify-center font-custom rounded-xl text-xl py-8 bg-second text-white">
-          <div onClick={copiarTexto}>
+          <div
+            onClick={copiarTexto}
+            className="hover:bg-white/10 p-4 rounded-full w-fit absolute bottom-6 right-10 active:bg-first active:transition-colors"
+          >
             <Copy />
           </div>
           <div

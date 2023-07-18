@@ -6,7 +6,7 @@ export const Copy = () => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="white"
-      className="w-6 h-6 cursor-pointer absolute bottom-8 right-10"
+      className="w-6 h-6 cursor-pointer "
     >
       <path
         strokeLinecap="round"
