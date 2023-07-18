@@ -1,4 +1,4 @@
-export { default as Arrow } from './Arrow';
+export * from './Arrow';
 export * from './Copy';
 export * from './Github';
 export * from './Linkedin';

@@ -21,7 +21,7 @@ function Translator() {
     interimTranscript,
     finalTranscript,
   } = useSpeechRecognition({
-    interimTranscriptDelay: 0, // Ajusta el tiempo de espera a 0ms
+    interimTranscriptDelay: 0,
   });
 
   useEffect(() => {
@@ -54,7 +54,7 @@ function Translator() {
   };
 
   if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
+    return <span>Browser doesn t support speech recognition.</span>;
   }
 
   const handdleClick = () => {
