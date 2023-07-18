@@ -4,6 +4,7 @@ import { Debounce, Detector, GetApi, Languages } from "../services";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+
 function Translator() {
   const [language, setLanguage] = useState("es");
   const [text, setText] = useState("");
@@ -11,7 +12,7 @@ function Translator() {
   const [title, setTitle] = useState("Select language");
   const [isOpen, setIsOpen] = useState(false);
   const [detector, setDetector] = useState("");
-
+  const [isListening, setIsListening] = useState(false);
   const {
     transcript,
     listening,
@@ -19,17 +20,21 @@ function Translator() {
     browserSupportsSpeechRecognition,
     interimTranscript,
     finalTranscript,
-  } = useSpeechRecognition();
+  } = useSpeechRecognition({
+    interimTranscriptDelay: 0, // Ajusta el tiempo de espera a 0ms
+  });
 
   useEffect(() => {
     if (listening) {
-      if (finalTranscript !== "") {
-        setText(finalTranscript);
-      }
+      setText(interimTranscript);
     }
-  }, [listening, language, text, finalTranscript]);
+  }, [listening, interimTranscript]);
 
-  const [isListening, setIsListening] = useState(false);
+  useEffect(() => {
+    if (finalTranscript !== "") {
+      setText(finalTranscript);
+    }
+  }, [finalTranscript]);
 
   useEffect(() => {
     if (isListening) {
@@ -37,11 +42,7 @@ function Translator() {
     } else {
       SpeechRecognition.stopListening();
     }
-  }, [
-    isListening,
-    SpeechRecognition.startListening,
-    SpeechRecognition.stopListening,
-  ]);
+  }, [isListening]);
 
   const handleToggleListening = () => {
     setIsListening((prevState) => !prevState);
@@ -53,7 +54,6 @@ function Translator() {
   };
 
   if (!browserSupportsSpeechRecognition) {
-    // eslint-disable-next-line react/no-unescaped-entities
     return <span>Browser doesn't support speech recognition.</span>;
   }
 
@@ -79,6 +79,7 @@ function Translator() {
       </button>
     );
   }
+
   const copiarTexto = () => {
     navigator.clipboard.writeText(translation);
     console.log("Texto copiado:", translation);
@@ -88,6 +89,7 @@ function Translator() {
     await GetApi(language, text, setTranslation);
     await Detector(text, setDetector);
   }
+
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center text-white px-10">
       <div className="absolute w-[250px] top-20">
@@ -103,9 +105,11 @@ function Translator() {
               setText(e.target.value);
             }}
           />
-          <p className="w-fit h-[300px] absolute resize-none z-20 font-custom rounded-xl text-xl top-32 left-8 bg-second text-white">
-            {transcript}
-          </p>
+          {!isListening && (
+            <p className="w-fit h-[300px] absolute resize-none z-20 font-custom rounded-xl text-xl top-32 left-8 bg-second text-white">
+              {transcript}
+            </p>
+          )}
           <div className="absolute z-20 w-full h-[30px] bottom-8 gap-9 flex items-center justify-center">
             <button
               className="hover:bg-first p-4 rounded-full"
@@ -150,7 +154,6 @@ function Translator() {
             <Arrow />
           </div>
           <div className="absolute w-full top-32 left-10">
-            {interimTranscript && <p>{interimTranscript}</p>}
             {translation && <p className="w-[50%]">{translation}</p>}
           </div>
 
