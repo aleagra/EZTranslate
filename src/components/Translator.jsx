@@ -72,7 +72,7 @@ function Translator() {
     return (
       <button
         onClick={() => onClick(value)}
-        className="font-custom hover:bg-second hover:rounded-lg p-3"
+        className="font-custom hover:bg-second hover:rounded-lg p-3 max-lg:text-base"
         value={value}
       >
         {text}
@@ -96,7 +96,7 @@ function Translator() {
         <img src="./public/logo.webp" alt="" className="w-fit h-auto" />
       </div>
       <div className="w-full h-[650px] flex gap-10 max-lg:flex-col ">
-        <div className="w-[50%] h-[600px] max-lg:w-full relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
+        <div className="w-[50%] h-[600px] max-lg:p-4 max-lg:w-full relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
           <textarea
             id="text"
             className="w-full resize-none outline-none font-custom rounded-xl text-xl py-24 bg-second text-white"
@@ -131,7 +131,7 @@ function Translator() {
             </div>
           </div>
         </div>
-        <div className="w-[50%] h-[600px] overflow-x-hidden break-words max-lg:w-full relative flex justify-center font-custom rounded-xl text-xl py-8 bg-second text-white">
+        <div className="w-[50%] h-[600px] max-lg:p-4 overflow-x-hidden break-words max-lg:w-full relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
           <div
             onClick={copiarTexto}
             className="hover:bg-white/10 p-4 rounded-full w-fit absolute bottom-6 right-10 active:bg-first active:transition-colors"
@@ -156,13 +156,13 @@ function Translator() {
             </div>
             <Arrow />
           </div>
-          <div className="w-[80%] h-[100px] absolute top-32 left-10">
-            {translation && <p className="">{translation}</p>}
+          <div className="">
+            {translation && <p className="w-[80%] h-[100px] absolute top-32 left-10">{translation}</p>}
           </div>
 
           {isOpen && (
             <>
-              <div className="absolute grid grid-cols-4 gap-4 bg-first rounded-lg my-16 p-4">
+              <div className="absolute grid grid-cols-4 max-lg:grid-cols-3 max-lg:whitespace-nowrap gap-4 bg-first rounded-lg my-16 p-4">
                 {Languages.map((item) => (
                   <LanguageText
                     value={item.language}
