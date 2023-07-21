@@ -72,7 +72,7 @@ function Translator() {
     return (
       <button
         onClick={() => onClick(value)}
-        className="font-custom hover:bg-second hover:rounded-lg p-3 max-lg:text-base"
+        className="font-custom hover:bg-second max-md:bg-second max-md:rounded-lg hover:rounded-lg p-3 max-lg:text-base"
         value={value}
       >
         {text}
@@ -82,7 +82,6 @@ function Translator() {
 
   const copiarTexto = () => {
     navigator.clipboard.writeText(translation);
-    console.log("Texto copiado:", translation);
   };
 
   async function translateText() {
@@ -91,15 +90,16 @@ function Translator() {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center text-white px-10">
-      <div className="absolute w-[250px] top-16">
+    <div className="w-full h-screen flex flex-col items-center justify-center text-white px-10 max-sm:px-6">
+      <div className="absolute w-[250px] max-sm:w-[180px] top-12 max-sm:top-8">
         <img src="./public/logo.webp" alt="" className="w-fit h-auto" />
       </div>
-      <div className="w-full h-[650px] flex gap-10 max-lg:flex-col ">
-        <div className="w-[50%] h-[600px] max-lg:p-4 max-lg:w-full relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
+      <div className="w-full h-[650px] flex gap-10 max-lg:flex-col">
+        <div className="w-[50%] h-[600px] max-lg:p-4 max-lg:w-full relative flex justify-center font-custom rounded-xl max-md:rounded-md text-xl p-8 border border-white/20 bg-first text-white">
           <textarea
+            maxLength={520}
             id="text"
-            className="w-full resize-none outline-none font-custom rounded-xl text-xl py-24 bg-second text-white"
+            className="w-full resize-none outline-none font-custom rounded-xl text-xl pt-24 max-md:pt-20 max-md:px-4 text-white bg-first"
             value={text}
             onChange={(e) => {
               setText(e.target.value);
@@ -110,7 +110,7 @@ function Translator() {
               {transcript}
             </p>
           )}
-          <div className="absolute z-20 w-full h-[30px] bottom-8 gap-9 flex items-center justify-center">
+          <div className="absolute z-20 w-full h-[30px] bottom-8 max-md:bottom-3 gap-9 flex items-center justify-center">
             <button
               className="hover:bg-first p-4 rounded-full"
               onClick={handleToggleListening}
@@ -119,7 +119,7 @@ function Translator() {
             </button>
             <button onClick={handleReset}>Reset</button>
           </div>
-          <div className="absolute bg-first rounded-full flex items-center h-[50px] max-lg:w-[300px]">
+          <div className="absolute bg-second rounded-full max-md:rounded-lg flex items-center h-[50px] max-lg:w-[300px] max-lg:top-6">
             <World />
             <div
               placeholder="Detectar idioma"
@@ -131,15 +131,15 @@ function Translator() {
             </div>
           </div>
         </div>
-        <div className="w-[50%] h-[600px] max-lg:p-4 overflow-x-hidden break-words max-lg:w-full relative flex justify-center font-custom rounded-xl text-xl p-8 bg-second text-white">
+        <div className="w-[50%] h-[600px] max-lg:p-4 overflow-x-hidden break-words max-lg:w-full relative flex justify-center font-custom rounded-xl text-xl p-8 bg-first text-white max-md:rounded-md border border-white/20">
           <div
             onClick={copiarTexto}
-            className="hover:bg-white/10 p-4 rounded-full w-fit absolute bottom-6 right-10 active:bg-first active:transition-colors"
+            className="hover:bg-white/10 p-4 max-md:p-2 rounded-full w-fit absolute bottom-6 max-md:right-4 max-md:bottom-4 right-10 active:bg-first active:transition-colors cursor-pointer"
           >
             <Copy />
           </div>
           <div
-            className="absolute bg-first rounded-full flex items-center h-[50px] cursor-pointer max-lg:w-[300px]"
+            className="absolute bg-second rounded-full max-md:rounded-md flex items-center h-[50px] cursor-pointer max-lg:w-[300px] max-md:top-6"
             onClick={handdleClick}
           >
             <World />
@@ -157,7 +157,11 @@ function Translator() {
             <Arrow />
           </div>
           <div className="">
-            {translation && <p className="w-[80%] h-[100px] absolute top-32 left-10">{translation}</p>}
+            {translation && (
+              <p className="w-[100%] h-[100px] absolute top-32 max-lg:top-28 left-0 px-8 max-lg:px-4">
+                {translation}
+              </p>
+            )}
           </div>
 
           {isOpen && (

@@ -5,8 +5,8 @@ export const Footer = () => {
   function Element() {
     return (
       <div className="w-full justify-between flex items-center">
-        {Info.map((element) => (
-          <div className="w-[100%] flex justify-center" key={element}>
+        {Info.map((element, index) => (
+          <div className="w-[100%] flex justify-center" key={index}>
             <div className="flex items-center gap-2  max-lg:flex-col">
               <h1 className="font-bold">{element.nombre}</h1>
               <div className="flex gap-3">
@@ -43,7 +43,7 @@ export const Footer = () => {
   }
 
   return (
-    <div className="w-full absolute flex justify-center h-[70px] bottom-0 bg-second text-white">
+    <div className="w-full absolute flex justify-center h-[70px] bottom-0 bg-first border border-white/20 text-white">
       <Element />
     </div>
   );
