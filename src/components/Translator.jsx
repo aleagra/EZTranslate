@@ -4,6 +4,7 @@ import { Debounce, Detector, GetApi, Languages } from "../services";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import logo from "../assets/logo.webp";
 
 function Translator() {
   const [language, setLanguage] = useState("es");
@@ -92,7 +93,7 @@ function Translator() {
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center text-white px-10 max-sm:px-6">
       <div className="absolute w-[250px] max-sm:w-[180px] top-12 max-sm:top-8">
-        <img src="./public/logo.webp" alt="" className="w-fit h-auto" />
+        <img src={logo} alt="" className="w-fit h-auto" />
       </div>
       <div className="w-full h-[650px] flex gap-10 max-lg:flex-col">
         <div className="w-[50%] h-[600px] max-lg:p-4 max-lg:w-full relative flex justify-center font-custom rounded-xl max-md:rounded-md text-xl p-8 border border-white/20 bg-first text-white">

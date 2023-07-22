@@ -22,7 +22,6 @@ async function Detector(text, setDetector) {
 
     try {
       const response = await axios.request(options);
-      console.log(response.data[0].language);
       setDetector(response.data[0].language);
     } catch (error) {
       console.error(error);

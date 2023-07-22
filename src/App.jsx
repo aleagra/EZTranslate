@@ -1,5 +1,4 @@
-import { Footer } from "./components/Footer";
-import Translator from "./components/Translator";
+import { Footer, Translator } from "./components";
 
 function App() {
   return (
