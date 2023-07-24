@@ -15,6 +15,7 @@ export const Footer = () => {
                   href={element.urlLinkedin}
                   className="hover:scale-125 ease-in duration-300"
                   rel="noreferrer"
+                  aria-label={`Perfil de LinkedIn de ${element.name}`}
                 >
                   <Linkedin />
                 </a>
@@ -23,6 +24,7 @@ export const Footer = () => {
                   href={element.urlGit}
                   className="hover:scale-125 ease-in duration-300"
                   rel="noreferrer"
+                  aria-label={`Perfil de GitHub de ${element.name}`}
                 >
                   <Github />
                 </a>
@@ -31,6 +33,7 @@ export const Footer = () => {
                   href={element.urlPortafolio}
                   className="hover:scale-125 ease-in duration-300"
                   rel="noreferrer"
+                  aria-label={`Portafolio de ${element.name}`}
                 >
                   <WorldPortafolio />
                 </a>
