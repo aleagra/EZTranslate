@@ -8,7 +8,7 @@ export const Footer = () => {
         {Info.map((element, index) => (
           <div className="w-[100%] flex justify-center" key={index}>
             <div className="flex items-center gap-2  max-lg:flex-col">
-              <h1 className="font-bold">{element.nombre}</h1>
+              <h4 className="font-bold max-md:text-sm">{element.nombre}</h4>
               <div className="flex gap-3">
                 <a
                   target="_blank"
@@ -43,7 +43,7 @@ export const Footer = () => {
   }
 
   return (
-    <div className="w-full absolute flex justify-center h-[70px] bottom-0 bg-first border border-white/20 text-white">
+    <div className="w-full absolute bottom-0 flex justify-center h-[80px] bg-first border border-white/20 text-white">
       <Element />
     </div>
   );

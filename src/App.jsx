@@ -1,12 +1,7 @@
-import { Footer, Translator } from "./components";
+import { Translator } from "./components";
 
 function App() {
-  return (
-    <>
-      <Translator />
-      <Footer />
-    </>
-  );
+  return <Translator />;
 }
 
 export default App;
