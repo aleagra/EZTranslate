@@ -118,7 +118,7 @@ function Translator() {
                   {transcript}
                 </p>
               )}
-              <div className="absolute z-20 w-full h-[30px] bottom-8 max-md:bottom-3 gap-9 flex items-center justify-center">
+              <div className="absolute z-20 w-full h-[30px] bottom-8 max-md:bottom-3 gap-9 flex items-center justify-center ">
                 <button
                   className="hover:bg-first p-4 rounded-full"
                   onClick={handleToggleListening}
@@ -130,9 +130,14 @@ function Translator() {
                 >
                   {isListening ? <StopIcon /> : <Microphone />}
                 </button>
-                <button onClick={handleReset}>Reset</button>
+                <button className="max-md:text-sm" onClick={handleReset}>
+                  Reset
+                </button>
               </div>
-              <div className="absolute bg-second rounded-full max-md:rounded-lg flex items-center h-[50px] max-lg:w-[300px] max-lg:top-4">
+              <label
+                className="absolute bg-second rounded-full max-md:rounded-lg flex items-center h-[50px] max-lg:w-[300px] max-lg:top-4"
+                htmlFor="text"
+              >
                 <World />
                 <div
                   placeholder="Detectar idioma"
@@ -142,7 +147,7 @@ function Translator() {
                     Detect language: {detector}
                   </span>
                 </div>
-              </div>
+              </label>
             </div>
             <div className="w-[50%] h-full max-lg:p-4 overflow-x-hidden break-words max-lg:w-full relative flex justify-center font-custom rounded-xl text-xl p-8 bg-first text-white max-md:rounded-md border border-white/20">
               <div
