@@ -122,6 +122,11 @@ function Translator() {
                 <button
                   className="hover:bg-first p-4 rounded-full"
                   onClick={handleToggleListening}
+                  aria-label={
+                    isListening
+                      ? "Detener micrófono"
+                      : "Iniciar grabación de voz"
+                  }
                 >
                   {isListening ? <StopIcon /> : <Microphone />}
                 </button>
