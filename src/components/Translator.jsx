@@ -101,23 +101,18 @@ function Translator() {
             className="w-[300px] absolute h-auto max-md:w-[150px] max-md:my-6"
           />
         </div>
-        <div className="w-full h-screen flex flex-col items-center justify-center pb-[70px] pt-[100px] text-white px-10 max-sm:px-6">
-          <div className="w-full h-[650px] max-md:h-[500px] flex gap-10 max-lg:flex-col">
+        <div className="w-full h-screen flex flex-col items-center justify-center pb-[70px] lg:pt-[100px]  text-white px-10 max-sm:px-6">
+          <div className="w-full h-[650px] max-md:h-[600px] flex gap-10 max-lg:flex-col">
             <div className="w-[50%] h-full max-lg:p-4 max-lg:w-full relative flex justify-center font-custom rounded-xl max-md:rounded-md text-xl p-8 border border-white/20 bg-first text-white">
               <textarea
                 maxLength={520}
                 id="text"
-                className="w-full resize-none outline-none font-custom rounded-xl text-xl pt-24 max-md:pt-20 max-md:px-4 text-white bg-first"
+                className="w-full max-lg:h-[220px] resize-none outline-none font-custom rounded-xl text-xl pt-24 max-md:pt-20 max-md:px-4 text-white bg-first"
                 value={text}
                 onChange={(e) => {
                   setText(e.target.value);
                 }}
               />
-              {!isListening && (
-                <p className="w-fit h-[300px] absolute resize-none z-20 font-custom rounded-xl text-xl top-32 left-8 bg-second text-white">
-                  {transcript}
-                </p>
-              )}
               <div className="absolute z-20 w-full h-[30px] bottom-8 max-md:bottom-3 gap-9 flex items-center justify-center ">
                 <button
                   className="hover:bg-first p-4 rounded-full"
@@ -174,13 +169,17 @@ function Translator() {
                 </div>
                 <Arrow />
               </div>
-              <div className="">
+             
                 {translation && (
-                  <p className="w-[100%] h-[100px] absolute top-32 max-lg:top-28 left-0 px-8 max-lg:px-4">
-                    {translation}
-                  </p>
+                <textarea
+                maxLength={520}
+                id="text"
+                className="w-full max-lg:h-[220px] resize-none outline-none font-custom rounded-xl text-xl pt-24 max-md:pt-20 max-md:px-4 text-white bg-first"
+                value={translation}
+                readOnly
+              />
                 )}
-              </div>
+              
 
               {isOpen && (
                 <>
