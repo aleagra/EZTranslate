@@ -95,8 +95,8 @@ function Translator() {
   return (
     <>
       <div className="grid grid-rows-[80px,1fr,80px] max-md:gap-6 gap-20 w-full h-screen max-md:h-[90vh] my-[5vh]">
-        <div className="flex w-full justify-center row-start-1 max-md:pt-4 pt-6">
-          <img src={logo} alt="" className="" />
+        <div className="flex w-fit justify-center items-center mx-auto row-start-1">
+          <img src={logo} alt="" className="w-[150px] h-fit" />
         </div>
         <div className="row-start-2 h-full flex max-lg:flex-col gap-10 px-4">
           <div className="max-md:h-[45%] w-full max-lg:p-4 max-lg:w-full relative flex justify-center font-custom rounded-xl max-md:rounded-md text-xl p-8 border border-white/20 bg-first text-white">
