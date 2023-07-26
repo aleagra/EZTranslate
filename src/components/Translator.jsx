@@ -95,15 +95,15 @@ function Translator() {
   return (
     <>
       <div className=" relative">
-        <div className="flex w-full justify-center">
+        <div className="flex w-full justify-center absolute max-md:static">
           <img
             src={logo}
             alt=""
-            className="w-[300px]  h-auto max-md:w-[150px] max-md:mt-4"
+            className="w-[300px]  h-auto max-md:w-[150px] max-md:mt-4 max-md:mb-0 my-10"
           />
         </div>
-        <div className="w-full h-screen flex flex-col items-center justify-center pb-[80px] lg:pt-[100px]  text-white px-10 max-sm:px-6">
-          <div className="w-full h-[100%] my-10 flex gap-10 max-lg:flex-col">
+        <div className="w-full h-screen flex flex-col items-center justify-center pb-[80px] text-white px-10 max-sm:px-6">
+          <div className="w-full max-lg:h-[100%] h-[600px] my-10 flex gap-10 max-lg:flex-col">
             <div className="w-[50%] h-full max-lg:p-4 max-lg:w-full relative flex justify-center font-custom rounded-xl max-md:rounded-md text-xl p-8 border border-white/20 bg-first text-white">
               <textarea
                 maxLength={520}
