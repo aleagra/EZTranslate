@@ -94,11 +94,11 @@ function Translator() {
 
   return (
     <>
-      <div className="grid grid-rows-[80px,1fr,80px] max-md:gap-6 gap-20 w-full h-screen max-md:h-[90vh] max-md:my-[5vh]">
+      <div className="grid grid-rows-[80px,1fr,80px] max-md:gap-6 gap-20 w-full h-screen max-md:h-[94vh] max-md:my-[3vh]">
         <div className="flex w-fit justify-center items-center mx-auto row-start-1">
           <img src={logo} alt="" className="max-md:w-[30%] w-[50%]" />
         </div>
-        <div className="row-start-2 h-full flex max-lg:flex-col gap-10 px-4">
+        <div className="row-start-2 h-full flex max-md:flex-col gap-10 px-4">
           <div className="max-md:h-[45%] w-full max-lg:p-4 max-lg:w-full relative flex justify-center font-custom rounded-xl max-md:rounded-md text-xl p-8 border border-white/20 bg-first text-white">
             <textarea
               maxLength={520}
