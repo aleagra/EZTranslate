@@ -16,7 +16,6 @@ function Translator() {
   const [detector, setDetector] = useState("");
   const [isListening, setIsListening] = useState(false);
   const {
-    transcript,
     listening,
     resetTranscript,
     browserSupportsSpeechRecognition,
@@ -88,21 +87,23 @@ function Translator() {
 
   async function translateText() {
     await GetApi(language, text, setTranslation);
+  }
+  async function detectorText() {
     await Detector(text, setDetector);
   }
 
   return (
     <>
       <div className=" relative">
-        <div className="flex w-full justify-center absolute top-4">
+        <div className="flex w-full justify-center">
           <img
             src={logo}
             alt=""
-            className="w-[300px] absolute h-auto max-md:w-[150px] max-md:my-6"
+            className="w-[300px]  h-auto max-md:w-[150px] max-md:mt-4"
           />
         </div>
-        <div className="w-full h-screen flex flex-col items-center justify-center pb-[70px] lg:pt-[100px]  text-white px-10 max-sm:px-6">
-          <div className="w-full h-[650px] max-md:h-[600px] flex gap-10 max-lg:flex-col">
+        <div className="w-full h-screen flex flex-col items-center justify-center pb-[80px] lg:pt-[100px]  text-white px-10 max-sm:px-6">
+          <div className="w-full h-[100%] my-10 flex gap-10 max-lg:flex-col">
             <div className="w-[50%] h-full max-lg:p-4 max-lg:w-full relative flex justify-center font-custom rounded-xl max-md:rounded-md text-xl p-8 border border-white/20 bg-first text-white">
               <textarea
                 maxLength={520}
@@ -169,17 +170,16 @@ function Translator() {
                 </div>
                 <Arrow />
               </div>
-             
-                {translation && (
+
+              {translation && (
                 <textarea
-                maxLength={520}
-                id="text"
-                className="w-full max-lg:h-[220px] resize-none outline-none font-custom rounded-xl text-xl pt-24 max-md:pt-20 max-md:px-4 text-white bg-first"
-                value={translation}
-                readOnly
-              />
-                )}
-              
+                  maxLength={520}
+                  id="text"
+                  className="w-full max-lg:h-[220px] resize-none outline-none font-custom rounded-xl text-xl pt-24 max-md:pt-20 max-md:px-4 text-white bg-first"
+                  value={translation}
+                  readOnly
+                />
+              )}
 
               {isOpen && (
                 <>
@@ -200,6 +200,7 @@ function Translator() {
               )}
             </div>
           </div>
+          <Debounce translateText={detectorText} text={text} />
           <Debounce translateText={translateText} text={text} />
           <Footer />
         </div>

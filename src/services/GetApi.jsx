@@ -13,7 +13,7 @@ async function GetApi(language, text, setTranslation) {
       },
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "285c59d0b8msh46372bba5f66c71p1194bbjsn26a8dd6a017b",
+        "X-RapidAPI-Key": "5a42cacf00msh6b85df453f74aaep10ad5ajsn6ef9bddc4f5c",
         "X-RapidAPI-Host": "microsoft-translator-text.p.rapidapi.com",
       },
       data: [
