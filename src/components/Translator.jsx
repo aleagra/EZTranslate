@@ -98,7 +98,7 @@ function Translator() {
         <div className="flex w-full justify-center row-start-1 max-md:pt-4 pt-6">
           <img src={logo} alt="" className="" />
         </div>
-        <div className="row-start-2 h-full flex max-lg:flex-col gap-10 px-6">
+        <div className="row-start-2 h-full flex max-lg:flex-col gap-10 px-4">
           <div className="max-md:h-[45%] w-full max-lg:p-4 max-lg:w-full relative flex justify-center font-custom rounded-xl max-md:rounded-md text-xl p-8 border border-white/20 bg-first text-white">
             <textarea
               maxLength={520}
