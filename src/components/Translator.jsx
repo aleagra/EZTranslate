@@ -94,7 +94,7 @@ function Translator() {
 
   return (
     <>
-      <div className="grid grid-rows-[80px,1fr,80px] max-md:gap-6 gap-20 w-full h-screen">
+      <div className="grid grid-rows-[80px,1fr,80px] max-md:gap-6 gap-20 w-full h-screen max-md:h-[90vh] my-[5vh]">
         <div className="flex w-full justify-center row-start-1 max-md:pt-4 pt-6">
           <img src={logo} alt="" className="" />
         </div>
