@@ -6,7 +6,7 @@ export function Arrow() {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="w-6 h-6 absolute right-4"
+      className="w-6 h-6 absolute right-4 stroke-white"
     >
       <path
         strokeLinecap="round"
