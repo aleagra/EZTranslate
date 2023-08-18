@@ -6,7 +6,7 @@ export const StopIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="w-6 h-6 fill-white stroke-white"
+      className="w-6 h-6 fill-[#3355c7] stroke-[#3355c7]"
     >
       <path
         strokeLinecap="round"

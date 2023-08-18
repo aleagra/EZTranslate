@@ -46,7 +46,7 @@ export const Footer = () => {
   }
 
   return (
-    <div className="w-full flex justify-center h-[80px] bg-first border-t border-white/20 text-white">
+    <div className="w-full flex justify-center h-[80px] bg-[#3355c7] border-t border-white/20 text-white">
       <Element />
     </div>
   );

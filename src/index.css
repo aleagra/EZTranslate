@@ -8,6 +8,6 @@
 }
 @layer base {
   body {
-    @apply bg-[#111116] font-mont;
+    @apply bg-[#ebecf1] font-mont;
   }
 }
