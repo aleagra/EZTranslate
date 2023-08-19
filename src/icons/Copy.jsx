@@ -4,9 +4,9 @@ export const Copy = () => {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke="#3355c7"
-      className="w-6 h-6"
+      strokeWidth={1.5}
+      stroke="#0f2040"
+      className="w-7 h-7"
     >
       <path
         strokeLinecap="round"

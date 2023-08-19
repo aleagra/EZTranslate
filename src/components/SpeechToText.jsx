@@ -50,9 +50,9 @@ function SpechToText({ isListening, setIsListening, setText }) {
   }
 
   return (
-    <div className="absolute z-20 w-full h-[30px] bottom-8 max-md:bottom-3 gap-9 flex items-center justify-center">
+    <div className="absolute z-20 w-fit bottom-6 left-6 max-md:bottom-3 gap-9 flex items-center">
       <button
-        className="hover:bg-[#ebecf1] p-4 rounded-full"
+        className="hover:bg-[#f2f4f7] p-2 rounded-md"
         onClick={handleToggleListening}
         aria-label={
           isListening ? "Detener micrófono" : "Iniciar grabación de voz"
@@ -60,12 +60,16 @@ function SpechToText({ isListening, setIsListening, setText }) {
       >
         {isListening ? <StopIcon /> : <Microphone />}
       </button>
-      <button
-        className="max-md:text-sm text-[#3355c7] font-semibold"
-        onClick={handleReset}
-      >
-        Reset
-      </button>
+      {isListening ? (
+        <button
+          className="max-md:text-sm text-first hover:bg-[#f2f4f7] p-2 rounded-md font-medium"
+          onClick={handleReset}
+        >
+          Reset
+        </button>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

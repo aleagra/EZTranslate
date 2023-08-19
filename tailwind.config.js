@@ -9,8 +9,7 @@ export default {
         mont:[ 'Monstserrat'],
       },
       colors:{
-        first: '#111116',
-        second: '#1b1b1f',
+        first: '#0f2040',
       }
     },
   },

@@ -19,9 +19,9 @@ function Translation({
   language,
 }) {
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex flex-col w-full h-full justify-center">
       <div
-        className="bg-[#3355c7] relative rounded-lg max-md:rounded-md flex items-center h-[50px] cursor-pointer w-[350px] mb-10 mx-auto max-md:top-6"
+        className="bg-first relative rounded-lg max-md:rounded-md flex items-center h-[50px] cursor-pointer w-[350px] mb-10 mx-auto max-md:top-6"
         onClick={handdleClick}
       >
         <World />
@@ -36,10 +36,10 @@ function Translation({
         </div>
         <Arrow />
       </div>
-      <div className="max-md:h-[45%] w-full h-[82%] max-lg:p-4 overflow-x-hidden break-words max-lg:w-full relative flex justify-center font-custom rounded-lg text-xl p-8 bg-white max-md:rounded-md">
+      <div className="max-md:h-[45%] w-full h-[65%] border shadow-sm border-black/10 max-lg:p-4 overflow-x-hidden break-words max-lg:w-full relative flex justify-center font-custom rounded-lg text-xl p-10 bg-white max-md:rounded-md">
         <div
           onClick={copiarTexto}
-          className="hover:bg-[#ebecf1] p-4 max-md:p-2 rounded-full w-fit absolute bottom-6 max-md:right-4 max-md:bottom-4 right-10 active:bg-first active:transition-colors cursor-pointer"
+          className="hover:bg-[#f2f4f7] p-2 rounded-md w-fit absolute bottom-6 max-md:right-4 max-md:bottom-4 right-6 cursor-pointer"
         >
           <Copy />
         </div>
@@ -48,7 +48,7 @@ function Translation({
           <textarea
             maxLength={520}
             id="text"
-            className="w-full max-lg:h-[220px] resize-none outline-none font-custom rounded-xl text-xl max-md:px-4 text-black bg-white"
+            className="w-full max-lg:h-[220px] resize-none outline-none font-custom rounded-xl text-2xl max-md:px-4 text-black bg-white"
             value={translation}
             readOnly
           />
@@ -56,7 +56,7 @@ function Translation({
 
         {isOpen && (
           <>
-            <div className="absolute grid grid-cols-4 max-lg:grid-cols-3 max-lg:whitespace-nowrap gap-4 max-md:border-none  bg-[#3355c7] rounded-lg p-4 shadow-lg">
+            <div className="absolute grid grid-cols-4 max-lg:grid-cols-3 max-lg:whitespace-nowrap gap-4 max-md:border-none  bg-first rounded-lg p-4 shadow-lg">
               {Languages.map((item) => (
                 <LanguageText
                   value={item.language}

@@ -10,9 +10,9 @@ function TextArea({
   detector,
 }) {
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col justify-center">
       <div
-        className="bg-[#3355c7] relative rounded-lg max-md:rounded-lg flex items-center h-[50px] mb-10 w-[350px] mx-auto text-center"
+        className="bg-first relative rounded-lg max-md:rounded-lg flex items-center h-[50px] mb-10 w-[350px] mx-auto text-center"
         htmlFor="text"
       >
         <World />
@@ -23,11 +23,12 @@ function TextArea({
           <span className="max-md:text-base">Detect language: {detector}</span>
         </div>
       </div>
-      <div className="max-md:h-[45%] bg-white h-[82%] w-full max-lg:p-4 max-lg:w-full relative flex justify-center font-custom rounded-lg max-md:rounded-md text-xl p-8text-white">
+      <div className="max-md:h-[45%] bg-white h-[65%] w-full max-lg:p-4 max-lg:w-full relative flex justify-center font-custom rounded-lg max-md:rounded-md text-xl p-8text-white">
         <textarea
           maxLength={520}
           id="text"
-          className="w-full resize-none outline-none font-custom rounded-xl text-xl p-10 max-md:pt-20 max-md:px-4 text-black bg-white"
+          placeholder="Escribe o pega texto aquí."
+          className="w-full resize-none outline-none font-custom rounded-xl text-2xl p-10 max-md:pt-20 max-md:px-4 text-black border shadow-sm border-black/10 bg-white"
           value={value}
           onChange={onChange}
         />
