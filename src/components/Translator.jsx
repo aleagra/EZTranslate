@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
-import { Arrow, Copy, Microphone, StopIcon, World } from "../icons";
-import { Debounce, Detector, GetApi, Languages } from "../services";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
+import { useState } from "react";
+import { Detector, GetApi, Languages } from "../services";
 import logo from "../assets/logo.webp";
 import { Footer } from "./Footer";
+import TextArea from "./TextArea";
+import Translation from "./Translation";
 
 function Translator() {
   const [language, setLanguage] = useState("es");
@@ -15,48 +13,6 @@ function Translator() {
   const [isOpen, setIsOpen] = useState(false);
   const [detector, setDetector] = useState("");
   const [isListening, setIsListening] = useState(false);
-  const {
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition,
-    interimTranscript,
-    finalTranscript,
-  } = useSpeechRecognition({
-    interimTranscriptDelay: 0,
-  });
-
-  useEffect(() => {
-    if (listening) {
-      setText(interimTranscript);
-    }
-  }, [listening, interimTranscript]);
-
-  useEffect(() => {
-    if (finalTranscript !== "") {
-      setText(finalTranscript);
-    }
-  }, [finalTranscript]);
-
-  useEffect(() => {
-    if (isListening) {
-      SpeechRecognition.startListening();
-    } else {
-      SpeechRecognition.stopListening();
-    }
-  }, [isListening]);
-
-  const handleToggleListening = () => {
-    setIsListening((prevState) => !prevState);
-  };
-
-  const handleReset = () => {
-    setText("");
-    resetTranscript();
-  };
-
-  if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn t support speech recognition.</span>;
-  }
 
   const handdleClick = () => {
     setIsOpen(!isOpen);
@@ -67,19 +23,6 @@ function Translator() {
     setIsOpen(false);
     await GetApi(selectedLanguage, text, setTranslation);
   };
-
-  // eslint-disable-next-line react/prop-types
-  function LanguageText({ value, text, onClick }) {
-    return (
-      <button
-        onClick={() => onClick(value)}
-        className="font-custom hover:bg-white hover:text-[#3355c7] text-white  max-md:bg-[#3355c7] max-md:rounded-lg hover:rounded-lg p-2 max-lg:text-sm"
-        value={value}
-      >
-        {text}
-      </button>
-    );
-  }
 
   const copiarTexto = () => {
     navigator.clipboard.writeText(translation);
@@ -99,109 +42,29 @@ function Translator() {
           <img src={logo} alt="" className="max-md:w-[30%] w-[12%]" />
         </div>
         <div className="row-start-2 h-full flex max-md:flex-col gap-10 px-16 max-md:px-6">
-          <div className="w-full">
-            <div
-              className="bg-[#3355c7] relative rounded-lg max-md:rounded-lg flex items-center h-[50px] mb-10 w-[350px] mx-auto text-center"
-              htmlFor="text"
-            >
-              <World />
-              <div
-                placeholder="Detectar idioma"
-                className="text-white w-full font-custom outline-none rounded-full"
-              >
-                <span className="max-md:text-base">
-                  Detect language: {detector}
-                </span>
-              </div>
-            </div>
-            <div className="max-md:h-[45%] bg-white h-[82%] w-full max-lg:p-4 max-lg:w-full relative flex justify-center font-custom rounded-lg max-md:rounded-md text-xl p-8text-white">
-              <textarea
-                maxLength={520}
-                id="text"
-                className="w-full resize-none outline-none font-custom rounded-xl text-xl p-10 max-md:pt-20 max-md:px-4 text-black bg-white"
-                value={text}
-                onChange={(e) => {
-                  setText(e.target.value);
-                }}
-              />
-              <div className="absolute z-20 w-full h-[30px] bottom-8 max-md:bottom-3 gap-9 flex items-center justify-center ">
-                <button
-                  className="hover:bg-first p-4 rounded-full"
-                  onClick={handleToggleListening}
-                  aria-label={
-                    isListening
-                      ? "Detener micrófono"
-                      : "Iniciar grabación de voz"
-                  }
-                >
-                  {isListening ? <StopIcon /> : <Microphone />}
-                </button>
-                <button
-                  className="max-md:text-sm text-[#3355c7] font-semibold"
-                  onClick={handleReset}
-                >
-                  Reset
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col w-full h-full">
-            <div
-              className="bg-[#3355c7] relative rounded-lg max-md:rounded-md flex items-center h-[50px] cursor-pointer w-[350px] mb-10 mx-auto max-md:top-6"
-              onClick={handdleClick}
-            >
-              <World />
-              <div
-                id="language"
-                value={language}
-                placeholder="Language"
-                className="text-white w-full font-custom outline-none rounded-full text-center"
-                onChange={(e) => setLanguage(e.target.value)}
-              >
-                <span className=" select-none max-md:text-base">{title}</span>
-              </div>
-              <Arrow />
-            </div>
-            <div className="max-md:h-[45%] w-full h-[82%] max-lg:p-4 overflow-x-hidden break-words max-lg:w-full relative flex justify-center font-custom rounded-lg text-xl p-8 bg-white max-md:rounded-md">
-              <div
-                onClick={copiarTexto}
-                className="hover:bg-white/10 p-4 max-md:p-2 rounded-full w-fit absolute bottom-6 max-md:right-4 max-md:bottom-4 right-10 active:bg-first active:transition-colors cursor-pointer"
-              >
-                <Copy />
-              </div>
+          <TextArea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            detector={detector}
+            setIsListening={setIsListening}
+            setText={setText}
+            isListening={isListening}
+          />
 
-              {translation && (
-                <textarea
-                  maxLength={520}
-                  id="text"
-                  className="w-full max-lg:h-[220px] resize-none outline-none font-custom rounded-xl text-xl max-md:px-4 text-black bg-white"
-                  value={translation}
-                  readOnly
-                />
-              )}
-
-              {isOpen && (
-                <>
-                  <div className="absolute grid grid-cols-4 max-lg:grid-cols-3 max-lg:whitespace-nowrap gap-4 max-md:border-none  bg-[#3355c7] rounded-lg p-4 shadow-lg">
-                    {Languages.map((item) => (
-                      <LanguageText
-                        value={item.language}
-                        text={item.name}
-                        key={item.language}
-                        onClick={(e) => {
-                          handleLanguageChange(e);
-                          setTitle(item.name);
-                        }}
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
-
-              <Debounce translateText={detectorText} text={text} />
-              <Debounce translateText={translateText} text={text} />
-            </div>
-          </div>
+          <Translation
+            translation={translation}
+            isOpen={isOpen}
+            Languages={Languages}
+            handleLanguageChange={handleLanguageChange}
+            setTitle={setTitle}
+            detectorText={detectorText}
+            translateText={translateText}
+            text={text}
+            title={title}
+            setLanguage={setLanguage}
+            handdleClick={handdleClick}
+            copiarTexto={copiarTexto}
+          />
         </div>
         <div className="row-start-3">
           <Footer />
