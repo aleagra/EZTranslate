@@ -38,7 +38,7 @@ function Translator() {
   return (
     <>
       <div className="grid grid-rows-[80px,1fr,80px] max-md:gap-6 w-full h-screen max-md:h-[94vh] max-md:my-[3vh]">
-        <div className="flex w-full h-full bg-first border-b border-black/10 shadow-sm items-center row-start-1 justify-center py-4 max-md:pt-0">
+        <div className="flex w-full h-full bg-first border-b border-black/10 shadow-sm items-center row-start-1 justify-center py-4 max-md:pt-0 select-none cursor-pointer">
           <img src={logo} alt="" className="max-md:w-[30%] w-[10%]" />
         </div>
         <div className="row-start-2 h-full flex max-md:flex-col gap-10 px-16 max-md:px-6">

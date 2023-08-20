@@ -6,7 +6,7 @@ export const World = () => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="white"
-      className="absolute z-20 left-12 w-6 h-6 top-3"
+      className="absolute z-20 left-6 w-6 h-6 top-3"
     >
       <path
         strokeLinecap="round"

@@ -43,12 +43,11 @@ function Translation({
         >
           <Copy />
         </div>
-
         {translation && (
           <textarea
             maxLength={520}
             id="text"
-            className="w-full max-lg:h-[220px] resize-none outline-none font-custom rounded-xl text-2xl max-md:px-4 text-black bg-white"
+            className="w-full max-lg:h-[220px] resize-none outline-none font-custom text-2xl max-md:px-4 text-black bg-white"
             value={translation}
             readOnly
           />

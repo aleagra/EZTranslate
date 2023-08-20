@@ -1,8 +1,9 @@
 import axios from "axios";
+import { Languages } from "./Languages";
 
 async function Detector(text, setDetector) {
-  const detectLanguage = async () => {
-    const options = {
+  const detectarIdioma = async () => {
+    const opciones = {
       method: "POST",
       url: "https://microsoft-translator-text.p.rapidapi.com/Detect",
       params: {
@@ -21,14 +22,22 @@ async function Detector(text, setDetector) {
     };
 
     try {
-      const response = await axios.request(options);
-      setDetector(response.data[0].language);
+      const respuesta = await axios.request(opciones);
+      const codigoIdiomaDetectado = respuesta.data[0].language;
+      const idiomaDetectado = Languages.find(
+        (lang) => lang.language === codigoIdiomaDetectado
+      );
+      const nombreIdiomaDetectado = idiomaDetectado
+        ? idiomaDetectado.name
+        : "Desconocido";
+
+      setDetector(nombreIdiomaDetectado);
     } catch (error) {
       console.error(error);
     }
   };
 
-  await detectLanguage();
+  await detectarIdioma();
 }
 
 export default Detector;

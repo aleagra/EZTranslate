@@ -7,6 +7,7 @@ export const Copy = () => {
       strokeWidth={1.5}
       stroke="#0f2040"
       className="w-7 h-7"
+      aria-label="Copiar texto"
     >
       <path
         strokeLinecap="round"
