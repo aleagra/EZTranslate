@@ -28,7 +28,7 @@ function TextArea({
           maxLength={320}
           id="text"
           placeholder="Escribe o pega texto aquí."
-          className="w-full resize-none outline-none font-custom rounded-xl text-2xl p-10 text-black border shadow-sm border-black/10 bg-white"
+          className="w-full resize-none outline-none font-custom rounded-xl text-2xl p-8 text-black border shadow-sm border-black/10 bg-white"
           value={value}
           onChange={onChange}
         />

@@ -37,7 +37,7 @@ function Translation({
         </div>
         <Arrow />
       </div>
-      <div className="w-full h-[65%] max-md:h-[250px] border shadow-sm border-black/10 overflow-y-hidden break-words max-lg:w-full relative flex justify-center font-custom rounded-lg text-xl max-md:pt-0 p-10 pb-20 bg-white">
+      <div className="bg-white h-[65%] max-md:h-[250px] w-full max-lg:w-full relative flex justify-center font-custom rounded-lg text-xl text-white">
         <div className="absolute right-12 bottom-8">
           <Tooltip
             position={"top"}
@@ -49,7 +49,7 @@ function Translation({
           <textarea
             maxLength={520}
             id="text"
-            className="w-full max-lg:h-[220px] resize-none outline-none font-custom text-2xl max-md:px-4 text-black bg-white"
+            className="w-full resize-none outline-none font-custom rounded-xl text-2xl p-8 text-black border shadow-sm border-black/10 bg-white"
             value={translation}
             readOnly
           />
