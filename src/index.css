@@ -11,3 +11,16 @@
     @apply bg-[#f7f7f7] font-mont;
   }
 }
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  scroll-behavior: smooth;
+  background: white;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #122040;
+  border: 3px solid #122040;
+}

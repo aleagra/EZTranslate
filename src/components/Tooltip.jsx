@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 
-const Tooltip = ({ position, copiarTexto, icon }) => {
+const Tooltip = ({ position, copiarTexto, icon, text }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [tooltipContent, setTooltipContent] = useState("Copiar traducción");
+  const [tooltipContent, setTooltipContent] = useState(text);
   const tool = () => {
     setTooltipContent("¡Texto copiado!");
   };
@@ -12,14 +11,14 @@ const Tooltip = ({ position, copiarTexto, icon }) => {
 
   const resetTooltipContent = () => {
     resetTimeout = setTimeout(() => {
-      setTooltipContent("Copiar traducción");
+      setTooltipContent(text);
     }, 10);
   };
 
   return (
     <div
       id="tooltip"
-      className="relative h-fit cursor-pointer group mr-2"
+      className="relative h-fit cursor-pointer group"
       onMouseEnter={() => {
         setIsHovered(true);
         clearTimeout(resetTimeout);
@@ -33,10 +32,10 @@ const Tooltip = ({ position, copiarTexto, icon }) => {
       }}
     >
       <div
-        className="my-1 hover:bg-[#f2f4f7] p-2 rounded-md active:bg-slate-400 transition-colors duration-500"
+        className="my-1 hover:bg-[#f2f4f7] p-2 rounded-md active:bg-slate-200 transition-colors duration-500"
         onClick={() => {
-          copiarTexto();
-          tool();
+          copiarTexto && copiarTexto();
+          copiarTexto && tool();
         }}
       >
         {icon}

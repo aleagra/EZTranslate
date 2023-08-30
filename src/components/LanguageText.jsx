@@ -1,4 +1,3 @@
-// eslint-disable-next-line react/prop-types
 function LanguageText({ value, text, onClick }) {
   return (
     <button

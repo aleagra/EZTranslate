@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 import { useEffect } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import { Microphone, StopIcon } from "../icons";
+import Tooltip from "./Tooltip";
 
 function SpechToText({ isListening, setIsListening, setText }) {
   const {
@@ -52,20 +52,36 @@ function SpechToText({ isListening, setIsListening, setText }) {
   return (
     <div className="absolute z-20 w-fit bottom-6 left-6 max-md:bottom-3 gap-9 flex items-center">
       <button
-        className="hover:bg-[#f2f4f7] p-2 rounded-md"
+        className="rounded-md"
         onClick={handleToggleListening}
         aria-label={
           isListening ? "Detener micrófono" : "Iniciar grabación de voz"
         }
       >
-        {isListening ? <StopIcon /> : <Microphone />}
+        {isListening ? (
+          <Tooltip
+            position={"top"}
+            icon={<StopIcon />}
+            text={"Detener traduccion por voz"}
+          ></Tooltip>
+        ) : (
+          <Tooltip
+            position={"top"}
+            text={"Traducir por voz"}
+            icon={<Microphone />}
+          ></Tooltip>
+        )}
       </button>
       {isListening ? (
         <button
-          className="max-md:text-sm text-first hover:bg-[#f2f4f7] p-2 rounded-md font-medium"
+          className="max-md:text-sm text-first rounded-md font-medium"
           onClick={handleReset}
         >
-          Reset
+          <Tooltip
+            position={"top"}
+            text={"Borrar Traduccion"}
+            icon={"Reset"}
+          ></Tooltip>
         </button>
       ) : (
         ""

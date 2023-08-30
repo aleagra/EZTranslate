@@ -1,6 +1,6 @@
 import { World } from "../icons";
 import SpechToText from "./SpeechToText";
-/* eslint-disable react/prop-types */
+
 function TextArea({
   value,
   onChange,
@@ -18,9 +18,11 @@ function TextArea({
         <World />
         <div
           placeholder="Detectar idioma"
-          className="text-white w-full font-custom outline-none rounded-full"
+          className="text-white w-full max-md:text-lg font-custom outline-none rounded-full"
         >
-          <span className="max-md:text-base">Detect language: {detector}</span>
+          <span className="max-md:text-base">
+            Detectar lenguaje: {detector}
+          </span>
         </div>
       </div>
       <div className="bg-white h-[65%] max-md:h-[250px] w-full max-lg:w-full relative flex justify-center font-custom rounded-lg text-xl text-white">
@@ -28,7 +30,7 @@ function TextArea({
           maxLength={320}
           id="text"
           placeholder="Escribe o pega texto aquí."
-          className="w-full resize-none outline-none font-custom rounded-xl text-2xl p-8 text-black border shadow-sm border-black/10 bg-white"
+          className="w-full resize-none outline-none font-custom max-md:text-lg rounded-xl max-md:p-4 text-2xl p-8 max-md:mb-14 text-black  bg-white"
           value={value}
           onChange={onChange}
         />
