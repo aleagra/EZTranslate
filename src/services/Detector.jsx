@@ -1,18 +1,19 @@
 import axios from "axios";
 import { Languages } from "./Languages";
+import config from "../components/const";
 
 async function Detector(text, setDetector) {
   const detectarIdioma = async () => {
     const opciones = {
       method: "POST",
-      url: "https://microsoft-translator-text.p.rapidapi.com/Detect",
+      url: config.REACT_APP_DETECTOR,
       params: {
         "api-version": "3.0",
       },
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "5a42cacf00msh6b85df453f74aaep10ad5ajsn6ef9bddc4f5c",
-        "X-RapidAPI-Host": "microsoft-translator-text.p.rapidapi.com",
+        "X-RapidAPI-Key": config.REACT_APP_KEY,
+        "X-RapidAPI-Host": config.REACT_APP_HOST,
       },
       data: [
         {
@@ -32,7 +33,6 @@ async function Detector(text, setDetector) {
         : "Desconocido";
 
       setDetector(nombreIdiomaDetectado);
-      console.log(respuesta);
     } catch (error) {
       console.error(error);
     }

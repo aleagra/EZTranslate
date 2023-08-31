@@ -1,10 +1,10 @@
 import axios from "axios";
-
+import config from "../components/const";
 async function GetApi(language, text, setTranslation) {
   const translateText = async () => {
     const options = {
       method: "POST",
-      url: "https://microsoft-translator-text.p.rapidapi.com/translate",
+      url: config.REACT_APP_TRANSLATE,
       params: {
         "to[0]": language,
         "api-version": "3.0",
@@ -13,8 +13,8 @@ async function GetApi(language, text, setTranslation) {
       },
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "5a42cacf00msh6b85df453f74aaep10ad5ajsn6ef9bddc4f5c",
-        "X-RapidAPI-Host": "microsoft-translator-text.p.rapidapi.com",
+        "X-RapidAPI-Key": config.REACT_APP_KEY,
+        "X-RapidAPI-Host": config.REACT_APP_HOST,
       },
       data: [
         {
