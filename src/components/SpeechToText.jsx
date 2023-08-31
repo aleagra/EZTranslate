@@ -1,11 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import { Microphone, StopIcon } from "../icons";
 import Tooltip from "./Tooltip";
 
-function SpechToText({ isListening, setIsListening, setText }) {
+function SpechToText({ isListening, setIsListening, setText, text }) {
+  const [isclick, setIsclick] = useState(false);
   const {
     listening,
     resetTranscript,
@@ -48,9 +49,12 @@ function SpechToText({ isListening, setIsListening, setText }) {
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn t support speech recognition.</span>;
   }
+  const click = () => {
+    setIsclick(true);
+  };
 
   return (
-    <div className="absolute z-20 w-fit bottom-6 left-6 max-md:bottom-3 gap-9 flex items-center">
+    <div className="absolute z-20 2xl:bottom-8 bottom-4 left-0 px-8 max-md:bottom-0 gap-9 flex justify-between items-center w-full">
       <button
         className="rounded-md"
         onClick={handleToggleListening}
@@ -60,12 +64,18 @@ function SpechToText({ isListening, setIsListening, setText }) {
       >
         {isListening ? (
           <Tooltip
+            setIsclick={setIsclick}
+            isclick={isclick}
             position={"top"}
+            click={click}
             icon={<StopIcon />}
             text={"Detener traduccion por voz"}
           ></Tooltip>
         ) : (
           <Tooltip
+            setIsclick={setIsclick}
+            click={click}
+            isclick={isclick}
             position={"top"}
             text={"Traducir por voz"}
             icon={<Microphone />}
@@ -74,7 +84,7 @@ function SpechToText({ isListening, setIsListening, setText }) {
       </button>
       {isListening ? (
         <button
-          className="max-md:text-sm text-first rounded-md font-medium"
+          className="max-md:text-base text-first rounded-md font-medium"
           onClick={handleReset}
         >
           <Tooltip
@@ -86,6 +96,9 @@ function SpechToText({ isListening, setIsListening, setText }) {
       ) : (
         ""
       )}
+      <span className="text-xl text-black max-md:text-base font-medium">
+        {text?.length} / 320
+      </span>
     </div>
   );
 }

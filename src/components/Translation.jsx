@@ -1,4 +1,4 @@
-import { Arrow, Copy, World } from "../icons";
+import { Arrow, Copy } from "../icons";
 import { Debounce } from "../services";
 import LanguageText from "./LanguageText";
 import Tooltip from "./Tooltip";
@@ -19,12 +19,11 @@ function Translation({
   language,
 }) {
   return (
-    <div className="flex flex-col w-full h-full justify-center max-md:mb-16">
+    <div className="flex flex-col w-full h-full justify-center">
       <div
-        className="bg-first relative rounded-lg max-md:rounded-md flex items-center h-[50px] cursor-pointer w-[350px] mb-10 mx-auto max-md:top-6"
+        className="bg-first relative rounded-lg max-md:rounded-md flex items-center h-[50px] cursor-pointer w-[350px] mb-10 mx-auto"
         onClick={handdleClick}
       >
-        <World />
         <div
           id="language"
           value={language}
@@ -37,7 +36,7 @@ function Translation({
         <Arrow isOpen={isOpen} />
       </div>
       <div className="bg-white h-[65%] max-md:h-[250px] w-full max-lg:w-full relative flex justify-center font-custom rounded-lg text-xl text-white">
-        <div className="absolute right-6 bottom-8 max-md:bottom-3  z-10">
+        <div className="absolute right-8 2xl:bottom-8 bottom-4 max-md:bottom-1 z-10">
           <Tooltip
             position={"top"}
             copiarTexto={copiarTexto}
@@ -49,7 +48,7 @@ function Translation({
           <textarea
             maxLength={520}
             id="text"
-            className="w-full resize-none max-md:text-lg outline-none font-custom rounded-xl text-2xl p-8 max-md:p-4 max-md:mb-14 text-black bg-white"
+            className="w-full resize-none max-md:text-lg outline-none font-custom rounded-xl text-2xl p-8 max-md:p-4 max-md:mb-14 text-black bg-white custom-scrollbar"
             value={translation}
             readOnly
           />
@@ -64,9 +63,9 @@ function Translation({
             ></div>
           )}
           <div
-            className={`absolute grid transition-opacity duration-300 grid-cols-4 my-10 max-md:my-0 ${
+            className={`absolute grid transition-opacity duration-300 grid-cols-4 max-md:my-0 ${
               isOpen ? "opacity-100" : "opacity-0 z-[-1]"
-            }  max-lg:whitespace-nowrap gap-4 max-md:border-none bg-first rounded-lg p-4 shadow-lg`}
+            }  max-lg:whitespace-nowrap gap-4 bg-first rounded-lg p-4 max-md:gap-2 z-10 max-md:text-xs max-md:h-full shadow-lg`}
           >
             {Languages.map((item) => (
               <LanguageText
@@ -82,8 +81,9 @@ function Translation({
           </div>
         </>
 
-        <Debounce translateText={detectorText} text={text} />
-        <Debounce translateText={translateText} text={text} />
+        {text == "" ? "" : <Debounce callback={detectorText} text={text} />}
+
+        <Debounce callback={translateText} text={text} />
       </div>
     </div>
   );

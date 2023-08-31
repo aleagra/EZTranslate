@@ -32,6 +32,7 @@ async function Detector(text, setDetector) {
         : "Desconocido";
 
       setDetector(nombreIdiomaDetectado);
+      console.log(respuesta);
     } catch (error) {
       console.error(error);
     }

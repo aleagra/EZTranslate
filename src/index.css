@@ -24,3 +24,15 @@ body::-webkit-scrollbar-thumb {
   background-color: #122040;
   border: 3px solid #122040;
 }
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  scroll-behavior: smooth;
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-[#142040] border-[3px] border-[#142040];
+}

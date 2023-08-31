@@ -1,7 +1,16 @@
 import { useState } from "react";
 
-const Tooltip = ({ position, copiarTexto, icon, text }) => {
+const Tooltip = ({
+  position,
+  copiarTexto,
+  icon,
+  text,
+  setIsclick,
+  isclick,
+  click,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
+
   const [tooltipContent, setTooltipContent] = useState(text);
   const tool = () => {
     setTooltipContent("¡Texto copiado!");
@@ -25,6 +34,7 @@ const Tooltip = ({ position, copiarTexto, icon, text }) => {
       }}
       onMouseLeave={() => {
         setIsHovered(false);
+        isclick && setIsclick(false);
         clearTimeout(resetTimeout);
         setTimeout(() => {
           resetTooltipContent();
@@ -36,6 +46,7 @@ const Tooltip = ({ position, copiarTexto, icon, text }) => {
         onClick={() => {
           copiarTexto && copiarTexto();
           copiarTexto && tool();
+          click && click();
         }}
       >
         {icon}
@@ -48,7 +59,7 @@ const Tooltip = ({ position, copiarTexto, icon, text }) => {
             : ""
         }
         ${isHovered ? "opacity-100" : "opacity-0 pointer-events-none"} 
-        transition-opacity duration-500`}
+        transition-opacity duration-500 ${isclick ? "hidden" : ""}`}
       >
         {tooltipContent}
       </span>
@@ -59,7 +70,7 @@ const Tooltip = ({ position, copiarTexto, icon, text }) => {
           position === "top"
             ? "left-1/2 -translate-x-1/2 bottom-full border-l-transparent border-r-transparent border-b-0 border-t-first"
             : ""
-        }`}
+        } ${isclick ? "hidden" : ""}`}
       ></span>
     </div>
   );

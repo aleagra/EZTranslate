@@ -1,4 +1,3 @@
-import { World } from "../icons";
 import SpechToText from "./SpeechToText";
 
 function TextArea({
@@ -8,6 +7,7 @@ function TextArea({
   setText,
   setIsListening,
   detector,
+  text,
 }) {
   return (
     <div className="w-full flex flex-col justify-center">
@@ -15,14 +15,17 @@ function TextArea({
         className="bg-first relative rounded-lg max-md:rounded-lg flex items-center h-[50px] mb-10 w-[350px] mx-auto text-center"
         htmlFor="text"
       >
-        <World />
         <div
           placeholder="Detectar idioma"
           className="text-white w-full max-md:text-lg font-custom outline-none rounded-full"
         >
-          <span className="max-md:text-base">
-            Detectar lenguaje: {detector}
-          </span>
+          {detector ? (
+            <span className="max-md:text-base">
+              Idioma detectado: {detector}
+            </span>
+          ) : (
+            <span className="max-md:text-base">Detectar idioma</span>
+          )}
         </div>
       </div>
       <div className="bg-white h-[65%] max-md:h-[250px] w-full max-lg:w-full relative flex justify-center font-custom rounded-lg text-xl text-white">
@@ -30,7 +33,7 @@ function TextArea({
           maxLength={320}
           id="text"
           placeholder="Escribe o pega texto aquí."
-          className="w-full resize-none outline-none font-custom max-md:text-lg rounded-xl max-md:p-4 text-2xl p-8 max-md:mb-14 text-black  bg-white"
+          className="w-full resize-none outline-none font-custom max-md:text-lg rounded-xl max-md:p-4 text-2xl p-8 max-md:mb-14 text-black  bg-white custom-scrollbar"
           value={value}
           onChange={onChange}
         />
@@ -38,6 +41,7 @@ function TextArea({
           isListening={isListening}
           setIsListening={setIsListening}
           setText={setText}
+          text={text}
         />
       </div>
     </div>

@@ -2,7 +2,7 @@ function LanguageText({ value, text, onClick }) {
   return (
     <button
       onClick={() => onClick(value)}
-      className="font-custom hover:bg-white hover:text-first text-white  max-md:bg-first max-md:rounded-lg hover:rounded-lg p-2 max-lg:text-sm"
+      className={` font-custom hover:bg-white hover:text-first text-white max-md:border-b max-md:border-white  max-md:bg-first hover:rounded-lg p-2 max-lg:text-sm `}
       value={value}
     >
       {text}
