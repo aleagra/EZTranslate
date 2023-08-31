@@ -3,7 +3,7 @@ import debounce from "lodash.debounce";
 
 function Debounce({ callback, text }) {
   const [debouncedText, setDebouncedText] = useState(text);
-  const debouncedTranslateText = debounce(callback, 300);
+  const debouncedTranslateText = debounce(callback, 100);
 
   useEffect(() => {
     setDebouncedText(text);
